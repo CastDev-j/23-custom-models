@@ -40,10 +40,14 @@ scene.add(floor);
 
 // adding a model
 
+let hamburger: THREE.Object3D | null = null;
+
 gltfLoader.load("models/hamburger/hamburger.gltf", (gltf) => {
   gltf.scene.scale.setScalar(0.1);
   gltf.scene.position.set(0, 0.1, 0);
-  scene.add(gltf.scene);
+
+  hamburger = gltf.scene;
+  scene.add(hamburger);
 });
 
 // set up axes helper
@@ -83,11 +87,17 @@ const timer = new Timer();
 
 const tick = () => {
   timer.update();
-  // const elapsedTime = timer.getElapsed();
+  const elapsedTime = timer.getElapsed();
   // const deltaTime = timer.getDelta();
 
   // update controls to enable damping
   controls.update();
+
+  // rotate the hamburger model if it exists
+
+  if (hamburger) {
+    hamburger.rotation.y = elapsedTime * 0.5; 
+  }
 
   // render
   renderer.render(scene, camera);
