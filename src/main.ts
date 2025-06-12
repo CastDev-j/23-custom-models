@@ -42,6 +42,7 @@ scene.add(floor);
 
 gltfLoader.load("models/hamburger/hamburger.gltf", (gltf) => {
   gltf.scene.scale.setScalar(0.1);
+  gltf.scene.position.set(0, 0.1, 0);
   scene.add(gltf.scene);
 });
 
